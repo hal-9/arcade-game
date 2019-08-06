@@ -15,22 +15,48 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
 };
-
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+class Player {
+  constructor() {
+    this.x = 101 * 2;
+    this.y = -35 + 83*5;
+    this.sprite = 'images/char-boy.png';
+  }
+  update() {
+    // stuff
+  }
+  render() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  };
+    // stuff
+  handleInput(keyName) {
+    if (keyName === 'left' && this.x !== 0) {
+      this.x -= 101;
+    };
+    if (keyName === 'right' && this.x !== 101 * 4) {
+      this.x += 101;
+    };
+    if (keyName === 'down' && this.y !== -35 + 83 * 5) {
+      this.y += 83;
+    };
+    if (keyName === 'up' && this.y !== -35) {
+      this.y -= 83;
+    };
+  };
+};
 
+let allEnemies = [];
+let player =  new Player();
+let enemyCount = 10;
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-
-
+for (var i = 0; i < enemyCount; i++) {
+  let enemy = new Enemy();
+  allEnemies.push(enemy);
+}
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
