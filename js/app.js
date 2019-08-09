@@ -1,39 +1,58 @@
-// Enemies our player must avoid
-var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
 
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+const bodyColor = document.querySelector('body');
+
+class Enemy {
+  constructor(x, y, movementSpeed) {
+    this.x = x;
+    this.y = y;
     this.sprite = 'images/enemy-bug.png';
-};
-
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-};
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
+    this.movementSpeed = movementSpeed;
+  }
+  update(dt) {
+    if (Math.round(this.x) + 50 > player.x &&
+        Math.round(this.x) < player.x + 50 &&
+        50 + player.y > this.y &&
+        player.y < this.y + 50) {
+      player.x = 101 * 2;
+      player.y = -35 + 83*5;
+    }
+    this.x += this.movementSpeed * dt;
+    if (this.x > 505) {
+      let enemyPosY = allEnemyPosY[Math.floor(Math.random() * allEnemyPosY.length)];
+      let movementSpeed = Math.floor(Math.random() * (maxSpeed - minSpeed)) + minSpeed;
+      this.movementSpeed = movementSpeed;
+      this.y = enemyPosY;
+      this.x = -200;
+    }
+  }
+  render() {
+    // enemy is drawn on the canvas
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+  }
+}
 
 class Player {
   constructor() {
+    // initial position for the player character
     this.x = 101 * 2;
     this.y = -35 + 83*5;
     this.sprite = 'images/char-boy.png';
   }
   update() {
-    // stuff
+    if (this.y === -35 + 83 * 0) {
+      setTimeout(() => {
+        this.x = 101 * 2;
+        this.y = -35 + 83*5;
+      }, 500);
+    }
   }
   render() {
+    // player character is drawn on the canvas
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   };
     // stuff
   handleInput(keyName) {
+    // keyboard inputs move the player character accordingly
     if (keyName === 'left' && this.x !== 0) {
       this.x -= 101;
     };
@@ -51,10 +70,16 @@ class Player {
 
 let allEnemies = [];
 let player =  new Player();
-let enemyCount = 10;
+let enemyCount = 5;
+const minSpeed = 40;
+const maxSpeed = 300;
+const allEnemyPosY = [48, 131, 214];
+const enemyType = ['slime', 'skurr']
 
-for (var i = 0; i < enemyCount; i++) {
-  let enemy = new Enemy();
+for (let i = 0; i < enemyCount; i++) {
+  let enemyPosY = allEnemyPosY[Math.floor(Math.random() * allEnemyPosY.length)];
+  let movementSpeed = Math.floor(Math.random() * (maxSpeed - minSpeed)) + minSpeed;
+  let enemy = new Enemy(-300, enemyPosY, movementSpeed);
   allEnemies.push(enemy);
 }
 
