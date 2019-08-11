@@ -9,13 +9,24 @@ class Enemy {
     this.movementSpeed = movementSpeed;
   }
   update(dt) {
+    // collision handler checks if
     if (Math.round(this.x) + 50 > player.x &&
         Math.round(this.x) < player.x + 50 &&
         50 + player.y > this.y &&
         player.y < this.y + 50) {
-      player.x = 101 * 2;
-      player.y = -35 + 83*5;
-    }
+          if (document.querySelectorAll('.fa-star')[1].classList.contains('fa-star-o')) {
+            document.querySelectorAll('.fa-star')[0].classList.add('fa-star-o');
+            document.querySelector('.modal').style.display = 'block';
+          }
+          if (document.querySelectorAll('.fa-star')[2].classList.contains('fa-star-o')) {
+            document.querySelectorAll('.fa-star')[1].classList.add('fa-star-o');
+          }
+          else {
+          document.querySelectorAll('.fa-star')[2].classList.add('fa-star-o');
+          }
+          player.x = 101 * 2;
+          player.y = -35 + 83*5;
+        }
     this.x += this.movementSpeed * dt;
     if (this.x > 505) {
       let enemyPosY = allEnemyPosY[Math.floor(Math.random() * allEnemyPosY.length)];
@@ -31,6 +42,14 @@ class Enemy {
   }
 }
 
+let points = 0;
+
+let raisePoints = () => {
+  points += 5;
+  document.getElementsByClassName('points')[0].innerText = points;
+  document.getElementsByClassName('points')[1].innerText = points;
+}
+
 class Player {
   constructor() {
     // initial position for the player character
@@ -41,9 +60,10 @@ class Player {
   update() {
     if (this.y === -35 + 83 * 0) {
       setTimeout(() => {
+        raisePoints();
         this.x = 101 * 2;
         this.y = -35 + 83*5;
-      }, 500);
+      }, 10);
     }
   }
   render() {
@@ -94,4 +114,16 @@ document.addEventListener('keyup', function(e) {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
+});
+
+const winningScreenRestart = document.querySelector('.restartButton');
+
+winningScreenRestart.addEventListener('click', function(e){
+  document.querySelectorAll('.fa-star')[0].classList.remove('fa-star-o');
+  document.querySelectorAll('.fa-star')[1].classList.remove('fa-star-o');
+  document.querySelectorAll('.fa-star')[2].classList.remove('fa-star-o');
+  document.querySelector('.modal').style.display = 'none';
+  points = 0;
+  document.getElementsByClassName('points')[0].innerText = points;
+  document.getElementsByClassName('points')[1].innerText = points;
 });

@@ -1,4 +1,38 @@
 body {
     text-align: center;
-    background-color: black;
+}
+
+.stars {
+  padding: 0 50px 0 0;
+  margin-top: 50px;
+}
+
+.score {
+  font-size: 30px;
+  padding: 0 40px 0 0;
+  margin-top: 40px;
+}
+
+.stars li {
+  justify-content: center;
+  margin: 0 5px 0 0;
+  list-style: none;
+  display: inline;
+}
+
+.game-panel {
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.modal {
+  /* the default modal, when its in the background */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  display: none;
+  background-image: linear-gradient(#ffffff, #8a868c);
 }
