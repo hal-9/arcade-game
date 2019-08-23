@@ -1,4 +1,5 @@
 # Classic Arcade Game Project
+**classic arcade game project for the front-end web developer nanodegree at udacity**
 
 ## Instructions
 
@@ -18,3 +19,4 @@ You can either visit the page here https://tunikb.github.io/arcade-game/ or clon
 * the game was built utilizing object-oriented javascript
 * the aim was to build clean code that is easily readable and clear to understand
 
+## License
