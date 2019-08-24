@@ -20,3 +20,4 @@ You can either visit the page here https://tunikb.github.io/arcade-game/ or clon
 * the aim was to build clean code that is easily readable and clear to understand
 
 ## License
+
