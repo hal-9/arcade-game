@@ -3,7 +3,7 @@
 
 ## Instructions
 
-You can either visit the page here https://tunikb.github.io/arcade-game/ or clone/download a local version to your computer to run it by opening the index.html file in your browser. 
+You can either visit the page here https://hal-9.github.io/arcade-game/ or clone/download a local version to your computer to run it by opening the index.html file in your browser. 
 
 * The game starts automatically as soon as the page is loaded
 * the player can move the character by using the following arrow keys: up, right, down, left
